@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Download Threde</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black:  #0f0f0f;
+      --grey-1: #3a3a3a;
+      --grey-2: #6b6b6b;
+      --grey-3: #9a9a9a;
+      --grey-4: #d0d0d0;
+      --grey-5: #f0f0f0;
+      --white:  #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 400;
+      background: var(--white);
+      color: var(--black);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 48px;
+      border-bottom: 1px solid var(--grey-5);
+    }
+
+    .nav-wordmark {
+      font-size: 0.75em;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    /* ── MAIN ── */
+    .main {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 80px 24px 100px;
+    }
+
+    .eyebrow {
+      font-size: 0.75em;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--grey-3);
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(1.6em, 4vw, 2.2em);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      color: var(--black);
+      margin-bottom: 16px;
+    }
+
+    .intro {
+      font-size: 0.95em;
+      color: var(--grey-2);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      max-width: 480px;
+    }
+
+    /* ── DOWNLOAD BUTTON ── */
+    .download-block {
+      margin-bottom: 56px;
+    }
+
+    /*
+      ─────────────────────────────────────────────────────────
+      DOWNLOAD LINK
+      Replace the href value below with your GitHub Release URL.
+      Format: https://github.com/YOUR_USERNAME/YOUR_REPO/releases/latest/download/Threde-Installer.pkg
+      ─────────────────────────────────────────────────────────
+    */
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--black);
+      color: var(--white);
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 4px;
+      font-size: 0.95em;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: background 0.15s;
+    }
+
+    .btn-download:hover { background: var(--grey-1); }
+
+    .btn-download svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    .download-meta {
+      margin-top: 12px;
+      font-size: 0.8em;
+      color: var(--grey-3);
+    }
+
+    /* ── DIVIDER ── */
+    hr {
+      border: none;
+      border-top: 1px solid var(--grey-5);
+      margin: 0 0 48px;
+    }
+
+    /* ── INSTALL STEPS ── */
+    .steps-label {
+      font-size: 0.72em;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--grey-3);
+      margin-bottom: 28px;
+    }
+
+    .install-steps {
+      list-style: none;
+      counter-reset: step-counter;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .install-steps li {
+      counter-increment: step-counter;
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 16px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--grey-5);
+      align-items: baseline;
+    }
+
+    .install-steps li:last-child { border-bottom: none; }
+
+    .install-steps li::before {
+      content: counter(step-counter, decimal-leading-zero);
+      font-size: 0.75em;
+      font-weight: 500;
+      color: var(--grey-3);
+      letter-spacing: 0.04em;
+      padding-top: 1px;
+    }
+
+    .step-content h3 {
+      font-size: 0.9em;
+      font-weight: 500;
+      color: var(--black);
+      margin-bottom: 5px;
+      line-height: 1.4;
+    }
+
+    .step-content p {
+      font-size: 0.85em;
+      color: var(--grey-2);
+      line-height: 1.65;
+    }
+
+    .step-content a {
+      color: var(--grey-1);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .step-content code {
+      font-size: 0.9em;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      background: var(--grey-5);
+      padding: 1px 5px;
+      border-radius: 3px;
+      color: var(--grey-1);
+    }
+
+    /* ── REQUIREMENTS NOTE ── */
+    .req-note {
+      margin-top: 52px;
+      padding: 20px 24px;
+      background: var(--grey-5);
+      border-radius: 4px;
+    }
+
+    .req-note p {
+      font-size: 0.82em;
+      color: var(--grey-2);
+      line-height: 1.65;
+    }
+
+    .req-note strong {
+      font-weight: 500;
+      color: var(--grey-1);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 48px;
+      border-top: 1px solid var(--grey-5);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-wordmark {
+      font-size: 0.7em;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--grey-3);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 0.8em;
+      color: var(--grey-3);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover { color: var(--grey-1); }
+
+    @media (max-width: 540px) {
+      nav { padding: 20px 24px; }
+      footer { padding: 28px 24px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-wordmark">Threde</a>
+  </nav>
+
+  <div class="main">
+
+    <p class="eyebrow">Ready to download</p>
+    <h1>Install Threde on your Mac.</h1>
+    <p class="intro">
+      The installer is signed, notarized, and packages everything Threde needs.
+      No Python or developer tools required on your end.
+    </p>
+
+    <div class="download-block">
+      <!--
+        ─────────────────────────────────────────────────────────
+        Replace href below with your actual GitHub release URL.
+        Example:
+          https://github.com/johnnydwyer/threde/releases/latest/download/Threde-Installer.pkg
+        ─────────────────────────────────────────────────────────
+      -->
+      <a
+        class="btn-download"
+        href="https://github.com/YOUR_USERNAME/YOUR_REPO/releases/latest/download/Threde-Installer.pkg"
+        download
+      >
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M8 1v9M4.5 6.5 8 10l3.5-3.5M2 12h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Download Threde for Mac
+      </a>
+      <p class="download-meta">macOS 13 or later &nbsp;·&nbsp; Apple Silicon &amp; Intel &nbsp;·&nbsp; ~12 MB</p>
+    </div>
+
+    <hr>
+
+    <p class="steps-label">Installation guide</p>
+
+    <ol class="install-steps">
+      <li>
+        <div class="step-content">
+          <h3>Open the installer</h3>
+          <p>Double-click <code>Threde-Installer.pkg</code>. If macOS shows a security
+          prompt, open <strong>System Settings → Privacy &amp; Security</strong> and click
+          <strong>Open Anyway</strong>. This appears because the app is new — it is fully
+          notarized by Apple.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-content">
+          <h3>Get a free Gemini API key</h3>
+          <p>Go to <a href="https://aistudio.google.com/app/apikey" target="_blank">aistudio.google.com/app/apikey</a>,
+          sign in with any Google account, and click <strong>Create API key</strong>.
+          Copy the key — you'll paste it into Threde in the next step.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-content">
+          <h3>Complete the setup screen</h3>
+          <p>After installation, a setup page opens in your browser. Paste your
+          Gemini API key and click <strong>Continue</strong>. Then click
+          <strong>Sign in with Google</strong> to grant read-only Gmail access.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-content">
+          <h3>Your first briefing</h3>
+          <p>Threde runs automatically every morning at 5 AM. To run it immediately,
+          open <strong>Terminal</strong> and type: <code>open http://localhost:5050</code>
+          — if Threde has not yet generated a briefing it will do so on first visit.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="req-note">
+      <p>
+        <strong>Before you start:</strong> you need a Google account (Gmail), an internet
+        connection for the initial setup and daily fetch, and macOS 13 Ventura or later.
+        Threde stores everything — your API key, Gmail token, and all summaries — only on
+        your computer. See the <a href="privacy.html">privacy policy</a> for details.
+      </p>
+    </div>
+
+  </div>
+
+  <footer>
+    <span class="footer-wordmark">Threde</span>
+    <ul class="footer-links">
+      <li><a href="privacy.html">Privacy policy</a></li>
+      <li><a href="mailto:hello@threde.ai">Contact</a></li>
+    </ul>
+  </footer>
+
+</body>
+</html>

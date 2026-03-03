@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy — Threde</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black:  #0f0f0f;
+      --grey-1: #3a3a3a;
+      --grey-2: #6b6b6b;
+      --grey-3: #9a9a9a;
+      --grey-4: #d0d0d0;
+      --grey-5: #f0f0f0;
+      --white:  #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 400;
+      background: var(--white);
+      color: var(--black);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 48px;
+      border-bottom: 1px solid var(--grey-5);
+    }
+
+    .nav-wordmark {
+      font-size: 0.75em;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    /* ── PROSE ── */
+    .prose {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 72px 24px 100px;
+    }
+
+    .prose-eyebrow {
+      font-size: 0.72em;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--grey-3);
+      margin-bottom: 20px;
+    }
+
+    .prose h1 {
+      font-size: 1.8em;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      color: var(--black);
+      margin-bottom: 10px;
+    }
+
+    .prose .effective-date {
+      font-size: 0.82em;
+      color: var(--grey-3);
+      margin-bottom: 56px;
+    }
+
+    .prose h2 {
+      font-size: 0.88em;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-top: 48px;
+      margin-bottom: 16px;
+    }
+
+    .prose p {
+      font-size: 0.92em;
+      color: var(--grey-1);
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    .prose p:last-child { margin-bottom: 0; }
+
+    .prose ul {
+      list-style: none;
+      margin-bottom: 16px;
+    }
+
+    .prose ul li {
+      font-size: 0.92em;
+      color: var(--grey-1);
+      line-height: 1.7;
+      padding: 6px 0 6px 20px;
+      position: relative;
+    }
+
+    .prose ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--grey-3);
+    }
+
+    .prose a {
+      color: var(--grey-1);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    hr.section-rule {
+      border: none;
+      border-top: 1px solid var(--grey-5);
+      margin: 48px 0 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 48px;
+      border-top: 1px solid var(--grey-5);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-wordmark {
+      font-size: 0.7em;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--grey-3);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 0.8em;
+      color: var(--grey-3);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover { color: var(--grey-1); }
+
+    @media (max-width: 540px) {
+      nav { padding: 20px 24px; }
+      footer { padding: 28px 24px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-wordmark">Threde</a>
+  </nav>
+
+  <div class="prose">
+
+    <p class="prose-eyebrow">Legal</p>
+    <h1>Privacy Policy</h1>
+    <p class="effective-date">Effective date: March 2025</p>
+
+    <p>
+      Threde is a macOS application developed by John David Dwyer
+      (<a href="mailto:hello@threde.ai">hello@threde.ai</a>). This policy explains
+      what data Threde accesses, where that data goes, and what is never collected.
+    </p>
+
+    <h2>What Threde accesses</h2>
+    <p>
+      Threde requests read-only access to your Gmail account via Google's OAuth 2.0
+      authorisation flow. Specifically, it uses the
+      <code style="font-family:'SF Mono','Fira Code',monospace;font-size:0.9em;background:var(--grey-5);padding:1px 5px;border-radius:3px;">gmail.readonly</code>
+      scope to fetch email subject lines, sender names, and body text from
+      newsletter emails in your inbox. Threde does not access drafts, sent mail,
+      contacts, calendar, or any data outside the Gmail API.
+    </p>
+
+    <h2>Where your data goes</h2>
+    <p>
+      All processing happens on your computer. Email content fetched from Gmail is
+      passed to the Google Gemini API (a service operated by Google) to generate
+      summaries. No email content is sent to any Threde server — there is no Threde
+      server. The summarised briefing is stored as an HTML file on your local disk and
+      served by a local web server running on your machine.
+    </p>
+
+    <h2>What is stored on your machine</h2>
+    <ul>
+      <li>Your Gemini API key, saved in a local configuration file (<code style="font-family:'SF Mono','Fira Code',monospace;font-size:0.9em;background:var(--grey-5);padding:1px 5px;border-radius:3px;">config.yaml</code>)</li>
+      <li>A Gmail OAuth token (<code style="font-family:'SF Mono','Fira Code',monospace;font-size:0.9em;background:var(--grey-5);padding:1px 5px;border-radius:3px;">token.json</code>) stored in the application directory</li>
+      <li>Daily briefing HTML files in the application directory</li>
+      <li>A list of processed email IDs to avoid re-summarising the same newsletter</li>
+    </ul>
+    <p>
+      All of these files remain on your computer. Uninstalling the application
+      removes the application directory and all of its contents.
+    </p>
+
+    <h2>What Threde never does</h2>
+    <ul>
+      <li>Transmits your email content to any server operated by Threde</li>
+      <li>Sells, rents, or shares your data with third parties</li>
+      <li>Collects analytics, crash reports, or usage telemetry</li>
+      <li>Accesses email outside the read-only Gmail scope</li>
+      <li>Reads personal messages, drafts, sent mail, or attachments</li>
+    </ul>
+
+    <h2>Third-party services</h2>
+    <p>
+      Threde uses two third-party APIs: the Gmail API (Google) to fetch newsletters,
+      and the Gemini API (Google) to generate summaries. Your use of these services is
+      subject to Google's own privacy policy at
+      <a href="https://policies.google.com/privacy" target="_blank">policies.google.com/privacy</a>.
+      Your Gemini API key is transmitted to Google's servers only when Threde makes a
+      summarisation request — no key is ever sent to Threde or stored anywhere other
+      than your local machine.
+    </p>
+
+    <h2>Data retention and deletion</h2>
+    <p>
+      Threde does not retain any of your data. To remove all Threde data from
+      your computer, delete the application directory at
+      <code style="font-family:'SF Mono','Fira Code',monospace;font-size:0.9em;background:var(--grey-5);padding:1px 5px;border-radius:3px;">~/Applications/Threde</code>
+      and revoke Gmail access at
+      <a href="https://myaccount.google.com/permissions" target="_blank">myaccount.google.com/permissions</a>.
+    </p>
+
+    <h2>Children's privacy</h2>
+    <p>
+      Threde is not directed at children under 13 and does not knowingly collect
+      information from them.
+    </p>
+
+    <h2>Changes to this policy</h2>
+    <p>
+      If this policy changes materially, the effective date at the top of this page
+      will be updated. Continued use of the application after changes are posted
+      constitutes acceptance of the revised policy.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Questions about this policy can be sent to
+      <a href="mailto:hello@threde.ai">hello@threde.ai</a>.
+    </p>
+
+    <hr class="section-rule">
+
+  </div>
+
+  <footer>
+    <span class="footer-wordmark">Threde</span>
+    <ul class="footer-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="mailto:hello@threde.ai">Contact</a></li>
+    </ul>
+  </footer>
+
+</body>
+</html>

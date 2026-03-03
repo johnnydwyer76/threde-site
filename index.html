@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Threde — Your daily newsletter briefing</title>
+  <meta name="description" content="Threde reads your Gmail newsletters and delivers a focused daily briefing every morning. Free. Runs on your Mac.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black:  #0f0f0f;
+      --grey-1: #3a3a3a;
+      --grey-2: #6b6b6b;
+      --grey-3: #9a9a9a;
+      --grey-4: #d0d0d0;
+      --grey-5: #f0f0f0;
+      --white:  #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 400;
+      background: var(--white);
+      color: var(--black);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 48px;
+      border-bottom: 1px solid var(--grey-5);
+    }
+
+    .nav-wordmark {
+      font-size: 0.75em;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.85em;
+      color: var(--grey-2);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--black); }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 96px 24px 80px;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75em;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--grey-3);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2em, 5vw, 3em);
+      font-weight: 300;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    .hero p {
+      font-size: 1.05em;
+      font-weight: 400;
+      color: var(--grey-2);
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto 48px;
+    }
+
+    /* ── EMAIL GATE FORM ── */
+    .email-gate {
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .email-gate input[type="email"] {
+      flex: 1;
+      padding: 13px 16px;
+      font-size: 0.95em;
+      font-family: 'Inter', system-ui, sans-serif;
+      border: 1px solid var(--grey-4);
+      border-radius: 4px;
+      background: var(--white);
+      color: var(--black);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .email-gate input[type="email"]:focus {
+      border-color: var(--grey-1);
+    }
+
+    .email-gate input[type="email"]::placeholder {
+      color: var(--grey-3);
+    }
+
+    .btn-primary {
+      padding: 13px 22px;
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 0.88em;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+
+    .btn-primary:hover { background: var(--grey-1); }
+
+    .form-note {
+      margin-top: 14px;
+      font-size: 0.78em;
+      color: var(--grey-3);
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .form-note a {
+      color: var(--grey-2);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .form-error {
+      margin-top: 10px;
+      font-size: 0.82em;
+      color: #b91c1c;
+      text-align: center;
+      display: none;
+    }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--grey-5);
+      margin: 0;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how-section {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    .section-label {
+      font-size: 0.72em;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--grey-3);
+      margin-bottom: 48px;
+      text-align: center;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 40px;
+    }
+
+    .step-item {}
+
+    .step-number {
+      font-size: 0.72em;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--grey-3);
+      margin-bottom: 12px;
+    }
+
+    .step-item h3 {
+      font-size: 0.95em;
+      font-weight: 500;
+      color: var(--black);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .step-item p {
+      font-size: 0.875em;
+      color: var(--grey-2);
+      line-height: 1.65;
+    }
+
+    /* ── REQUIREMENTS ── */
+    .req-section {
+      background: var(--grey-5);
+      padding: 60px 24px;
+    }
+
+    .req-inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .req-section .section-label {
+      text-align: left;
+      margin-bottom: 28px;
+    }
+
+    .req-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .req-list li {
+      font-size: 0.88em;
+      color: var(--grey-1);
+      line-height: 1.5;
+      display: flex;
+      gap: 12px;
+      align-items: baseline;
+    }
+
+    .req-list li::before {
+      content: '—';
+      color: var(--grey-3);
+      flex-shrink: 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 48px;
+      border-top: 1px solid var(--grey-5);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-wordmark {
+      font-size: 0.7em;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--grey-3);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 0.8em;
+      color: var(--grey-3);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover { color: var(--grey-1); }
+
+    @media (max-width: 540px) {
+      nav { padding: 20px 24px; }
+      .nav-links { display: none; }
+      .form-row { flex-direction: column; }
+      .btn-primary { width: 100%; }
+      footer { padding: 28px 24px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-wordmark">Threde</a>
+    <ul class="nav-links">
+      <li><a href="#how-it-works">How it works</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <p class="hero-eyebrow">BETA · MacOS · Runs Locally</p>
+    <h1>Your newsletters, read, summarized, prioritized.</h1>
+    <p>
+      Threde pulls your newsletters from Gmail every morning, summarises them with AI,
+      and delivers a clean daily briefing to your browser — no app to open,
+      no inbox to manage.
+    </p>
+
+    <form class="email-gate" id="download-form" novalidate>
+      <div class="form-row">
+        <input
+          type="email"
+          id="email-input"
+          name="email"
+          placeholder="your@email.com"
+          autocomplete="email"
+          required
+        >
+        <button type="submit" class="btn-primary" id="submit-btn">Download for Mac</button>
+      </div>
+      <p class="form-note">
+        macOS 13 or later &nbsp;·&nbsp;
+        <a href="privacy.html">Privacy policy</a>
+      </p>
+      <p class="form-error" id="form-error">Please enter a valid email address.</p>
+    </form>
+  </section>
+
+  <hr class="section-divider">
+
+  <section class="how-section" id="how-it-works">
+    <p class="section-label">How it works</p>
+    <div class="steps-grid">
+      <div class="step-item">
+        <p class="step-number">01</p>
+        <h3>Install once</h3>
+        <p>Run the installer and connect your Google account. Threde only requests
+        read-only access to your Gmail.</p>
+      </div>
+      <div class="step-item">
+        <p class="step-number">02</p>
+        <h3>Wake up to a briefing</h3>
+        <p>Every morning at 5 AM, Threde scans your inbox for newsletters,
+        summarises them, and has the briefing ready in your browser.</p>
+      </div>
+      <div class="step-item">
+        <p class="step-number">03</p>
+        <h3>Read what matters</h3>
+        <p>A single scrollable page per day. Sources listed, key points extracted,
+        nothing you didn't ask for.</p>
+      </div>
+      <div class="step-item">
+        <p class="step-number">04</p>
+        <h3>Stays on your machine</h3>
+        <p>No cloud sync, no account, no subscription. Your emails and summaries
+        never leave your computer.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <section class="req-section">
+    <div class="req-inner">
+      <p class="section-label">Before you install</p>
+      <ul class="req-list">
+        <li>macOS 13 Ventura or later (Apple Silicon or Intel)</li>
+        <li>A Google account — Gmail is used to fetch your newsletters</li>
+        <li>A free Gemini API key from <a href="https://aistudio.google.com/app/apikey" style="color:var(--grey-1);text-underline-offset:2px;text-decoration:underline;">Google AI Studio</a> — used to summarise emails on-device</li>
+        <li>No Python or developer tools required — everything is bundled</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-wordmark">Threde</span>
+    <ul class="footer-links">
+      <li><a href="terms-of-service.html">Terms of service</a></li>
+      <li><a href="privacy.html">Privacy policy</a></li>
+      <li><a href="mailto:threde@threde.ai">Contact</a></li>
+    </ul>
+  </footer>
+
+<script>
+  (function () {
+    var form   = document.getElementById('download-form');
+    var input  = document.getElementById('email-input');
+    var btn    = document.getElementById('submit-btn');
+    var errMsg = document.getElementById('form-error');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var email = input.value.trim();
+
+      // Basic client-side validation
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errMsg.style.display = 'block';
+        input.focus();
+        return;
+      }
+
+      errMsg.style.display = 'none';
+      btn.disabled = true;
+      btn.textContent = 'One moment…';
+
+      // Submit to Formspree as JSON (background — user never sees their page)
+      fetch('https://formspree.io/f/xbdavygj', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ email: email })
+      })
+      .catch(function () {
+        // Silently swallow network errors — still send user to download page
+      })
+      .finally(function () {
+        window.location.href = 'download.html';
+      });
+    });
+  })();
+</script>
+</body>
+</html>

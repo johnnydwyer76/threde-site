@@ -1,0 +1,7 @@
+# ── macOS clutter ────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ── Distribution zips (not needed in repo) ───────────────────────
+*.zip
