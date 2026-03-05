@@ -107,7 +107,13 @@
       transition: background 0.15s;
     }
 
-    .btn-download:hover { background: var(--grey-1); }
+    .btn-download:hover:not([aria-disabled="true"]) { background: var(--grey-1); }
+    .btn-download[aria-disabled="true"] {
+      background: var(--grey-4);
+      color: var(--grey-3);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
 
     .btn-download svg {
       width: 16px;
@@ -119,6 +125,35 @@
       margin-top: 12px;
       font-size: 0.8em;
       color: var(--grey-3);
+    }
+
+    /* ── TERMS CHECKBOX ── */
+    .terms-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    .terms-check input[type="checkbox"] {
+      margin-top: 2px;
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+      accent-color: var(--black);
+      cursor: pointer;
+    }
+    .terms-check-label {
+      font-size: 0.82em;
+      color: var(--grey-2);
+      line-height: 1.55;
+      cursor: pointer;
+      user-select: none;
+    }
+    .terms-check-label a {
+      color: var(--grey-1);
+      text-decoration: underline;
+      text-underline-offset: 2px;
     }
 
     /* ── DIVIDER ── */
@@ -270,17 +305,17 @@
     </p>
 
     <div class="download-block">
-      <!--
-        ─────────────────────────────────────────────────────────
-        Replace href below with your actual GitHub release URL.
-        Example:
-          https://github.com/johnnydwyer/threde/releases/latest/download/Threde-Installer.pkg
-        ─────────────────────────────────────────────────────────
-      -->
+      <label class="terms-check">
+        <input type="checkbox" id="terms-agree" onchange="toggleDownload()">
+        <span class="terms-check-label">I have read and agree to the <a href="terms-of-service.html" target="_blank">Terms of Service</a> and <a href="privacy.html" target="_blank">Privacy Policy</a>.</span>
+      </label>
       <a
+        id="download-btn"
         class="btn-download"
         href="https://github.com/johnnydwyer76/threde/releases/latest/download/Threde-Installer.pkg"
         download
+        aria-disabled="true"
+        tabindex="-1"
       >
         <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <path d="M8 1v9M4.5 6.5 8 10l3.5-3.5M2 12h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -306,26 +341,17 @@
       </li>
       <li>
         <div class="step-content">
-          <h3>Get a free Gemini API key</h3>
-          <p>Go to <a href="https://aistudio.google.com/app/apikey" target="_blank">aistudio.google.com/app/apikey</a>,
-          sign in with any Google account, and click <strong>Create API key</strong>.
-          Copy the key — you'll paste it into Threde in the next step.</p>
-        </div>
-      </li>
-      <li>
-        <div class="step-content">
-          <h3>Complete the setup screen</h3>
-          <p>After installation, a setup page opens in your browser. Paste your
-          Gemini API key and click <strong>Continue</strong>. Then click
-          <strong>Sign in with Google</strong> to grant read-only Gmail access.</p>
+          <h3>Sign in with Google</h3>
+          <p>A setup page opens in your browser automatically. Click
+          <strong>Sign in with Google</strong> to grant Threde read-only access to your
+          Gmail. It reads newsletter emails only — no personal messages, no sent mail.</p>
         </div>
       </li>
       <li>
         <div class="step-content">
           <h3>Your first briefing</h3>
-          <p>Threde runs automatically every morning at 5 AM. To run it immediately,
-          open <strong>Terminal</strong> and type: <code>open http://localhost:5050</code>
-          — if Threde has not yet generated a briefing it will do so on first visit.</p>
+          <p>Threde runs your first briefing immediately after setup, then automatically
+          every morning at 5 AM. Your briefing opens in your browser whenever it's ready.</p>
         </div>
       </li>
     </ol>
@@ -334,7 +360,7 @@
       <p>
         <strong>Before you start:</strong> you need a Google account (Gmail), an internet
         connection for the initial setup and daily fetch, and macOS 13 Ventura or later.
-        Threde stores everything — your API key, Gmail token, and all summaries — only on
+        Threde stores everything — your Gmail token and all summaries — only on
         your computer. See the <a href="privacy.html">privacy policy</a> for details.
       </p>
     </div>
@@ -345,9 +371,24 @@
     <span class="footer-wordmark">Threde</span>
     <ul class="footer-links">
       <li><a href="privacy.html">Privacy policy</a></li>
-      <li><a href="mailto:hello@threde.ai">Contact</a></li>
+      <li><a href="uninstall.html">Uninstall</a></li>
+      <li><a href="mailto:threde@threde.ai">Contact</a></li>
     </ul>
   </footer>
+
+  <script>
+    function toggleDownload() {
+      var btn = document.getElementById('download-btn');
+      var checked = document.getElementById('terms-agree').checked;
+      if (checked) {
+        btn.removeAttribute('aria-disabled');
+        btn.removeAttribute('tabindex');
+      } else {
+        btn.setAttribute('aria-disabled', 'true');
+        btn.setAttribute('tabindex', '-1');
+      }
+    }
+  </script>
 
 </body>
 </html>

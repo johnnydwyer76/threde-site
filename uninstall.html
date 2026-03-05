@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Uninstall Threde</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black:  #0f0f0f;
+      --grey-1: #3a3a3a;
+      --grey-2: #6b6b6b;
+      --grey-3: #9a9a9a;
+      --grey-4: #d0d0d0;
+      --grey-5: #f0f0f0;
+      --white:  #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 400;
+      background: var(--white);
+      color: var(--black);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 48px;
+      border-bottom: 1px solid var(--grey-5);
+    }
+
+    .nav-wordmark {
+      font-size: 0.75em;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.85em;
+      color: var(--grey-2);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--black); }
+
+    /* ── MAIN ── */
+    .main {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 80px 24px 100px;
+    }
+
+    .eyebrow {
+      font-size: 0.75em;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--grey-3);
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(1.6em, 4vw, 2.2em);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      color: var(--black);
+      margin-bottom: 16px;
+    }
+
+    .intro {
+      font-size: 0.95em;
+      color: var(--grey-2);
+      line-height: 1.7;
+      margin-bottom: 48px;
+      max-width: 480px;
+    }
+
+    .steps-label {
+      font-size: 0.72em;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--grey-3);
+      margin-bottom: 28px;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--grey-5);
+      margin: 0 0 48px;
+    }
+
+    /* ── OPTION A ── */
+    .option-block {
+      margin-bottom: 52px;
+    }
+
+    .option-block p {
+      font-size: 0.88em;
+      color: var(--grey-2);
+      line-height: 1.65;
+      margin-bottom: 8px;
+    }
+
+    /* ── TERMINAL BLOCKS ── */
+    .terminal {
+      background: var(--grey-5);
+      border-radius: 4px;
+      padding: 16px 20px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.83em;
+      color: var(--grey-1);
+      line-height: 1.6;
+      overflow-x: auto;
+      margin: 12px 0;
+      white-space: pre;
+    }
+
+    /* ── MANUAL STEPS ── */
+    .install-steps {
+      list-style: none;
+      counter-reset: step-counter;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .install-steps li {
+      counter-increment: step-counter;
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 16px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--grey-5);
+      align-items: baseline;
+    }
+
+    .install-steps li:last-child { border-bottom: none; }
+
+    .install-steps li::before {
+      content: counter(step-counter, decimal-leading-zero);
+      font-size: 0.75em;
+      font-weight: 500;
+      color: var(--grey-3);
+      letter-spacing: 0.04em;
+      padding-top: 1px;
+    }
+
+    .step-content h3 {
+      font-size: 0.9em;
+      font-weight: 500;
+      color: var(--black);
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    .step-content p {
+      font-size: 0.85em;
+      color: var(--grey-2);
+      line-height: 1.65;
+      margin-bottom: 6px;
+    }
+
+    .step-content p:last-child { margin-bottom: 0; }
+
+    .step-content code {
+      font-size: 0.9em;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      background: var(--grey-5);
+      padding: 1px 5px;
+      border-radius: 3px;
+      color: var(--grey-1);
+    }
+
+    /* ── NOTE BOX ── */
+    .req-note {
+      margin-top: 52px;
+      padding: 20px 24px;
+      background: var(--grey-5);
+      border-radius: 4px;
+    }
+
+    .req-note p {
+      font-size: 0.82em;
+      color: var(--grey-2);
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+
+    .req-note p:last-child { margin-bottom: 0; }
+
+    .req-note a {
+      color: var(--grey-1);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .req-note code {
+      font-size: 0.9em;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      background: var(--grey-4);
+      padding: 1px 5px;
+      border-radius: 3px;
+      color: var(--grey-1);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 48px;
+      border-top: 1px solid var(--grey-5);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-wordmark {
+      font-size: 0.7em;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--grey-3);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 0.8em;
+      color: var(--grey-3);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover { color: var(--grey-1); }
+
+    @media (max-width: 540px) {
+      nav { padding: 20px 24px; }
+      .nav-links { display: none; }
+      footer { padding: 28px 24px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-wordmark">Threde</a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="download.html">Download</a></li>
+    </ul>
+  </nav>
+
+  <div class="main">
+
+    <p class="eyebrow">Uninstall</p>
+    <h1>Remove Threde from your Mac.</h1>
+    <p class="intro">
+      These steps fully remove Threde and its background processes.
+      Your email briefing archive is left untouched unless you choose to delete it.
+    </p>
+
+    <hr>
+
+    <div class="option-block">
+      <p class="steps-label">Option A &mdash; Automatic</p>
+      <p>If the Threde application folder is still present, run this in Terminal:</p>
+      <div class="terminal">bash ~/Applications/Threde/uninstall.sh</div>
+      <p>This stops all background processes, removes the LaunchAgents, deletes the application folder, and clears log files.</p>
+    </div>
+
+    <p class="steps-label">Option B &mdash; Manual</p>
+
+    <ol class="install-steps">
+      <li>
+        <div class="step-content">
+          <h3>Stop and remove the LaunchAgents</h3>
+          <p>Open Terminal and run:</p>
+          <div class="terminal">launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.threde.briefing.plist 2>/dev/null
+launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.threde.watchdog.plist 2>/dev/null
+launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.threde.setup.plist 2>/dev/null
+
+rm -f ~/Library/LaunchAgents/com.threde.briefing.plist
+rm -f ~/Library/LaunchAgents/com.threde.watchdog.plist
+rm -f ~/Library/LaunchAgents/com.threde.setup.plist</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-content">
+          <h3>Remove the application folder and dock icon</h3>
+          <div class="terminal">rm -rf ~/Applications/Threde
+rm -rf ~/Applications/Threde.app</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-content">
+          <h3>Remove log files</h3>
+          <div class="terminal">rm -f ~/Library/Logs/threde*.log</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-content">
+          <h3>Remove Threde from the Dock</h3>
+          <p>If you added Threde to your Dock, right-click its icon &rarr; <em>Options</em> &rarr; <em>Remove from Dock</em>.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="req-note">
+      <p>Your briefing archive in <code>~/Documents/Email Briefings</code> is not removed by the uninstaller. To delete it permanently:</p>
+      <div class="terminal">rm -rf ~/Documents/Email\ Briefings</div>
+      <p>Threde connected to your Google account via OAuth. To revoke that access, visit <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">myaccount.google.com/permissions</a>, find Threde, and click <em>Remove access</em>.</p>
+    </div>
+
+  </div>
+
+  <footer>
+    <span class="footer-wordmark">Threde</span>
+    <ul class="footer-links">
+      <li><a href="terms-of-service.html">Terms of service</a></li>
+      <li><a href="privacy.html">Privacy policy</a></li>
+      <li><a href="mailto:threde@threde.ai">Contact</a></li>
+    </ul>
+  </footer>
+
+</body>
+</html>
