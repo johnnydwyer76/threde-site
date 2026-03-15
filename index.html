@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Threde — Your daily newsletter briefing</title>
-  <meta name="description" content="Threde reads your Gmail newsletters and delivers a focused daily briefing every morning. Free. Runs on your Mac.">
+  <meta name="description" content="Threde reads your Gmail newsletters and delivers a focused daily briefing to your iPhone every morning. Sign up for early access.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -175,6 +175,14 @@
       display: none;
     }
 
+    .form-success {
+      margin-top: 10px;
+      font-size: 0.88em;
+      color: var(--grey-1);
+      text-align: center;
+      display: none;
+    }
+
     /* ── DIVIDER ── */
     .section-divider {
       border: none;
@@ -320,15 +328,15 @@
   </nav>
 
   <section class="hero">
-    <p class="hero-eyebrow">BETA · MacOS · Runs Locally</p>
+    <p class="hero-eyebrow">COMING SOON · iPHONE</p>
     <h1>Your newsletters, read, summarized, prioritized.</h1>
     <p>
-      Threde pulls your newsletters from Gmail every morning, summarises them with AI,
-      and delivers a clean daily briefing to your browser — no app to open,
+      Threde reads your Gmail newsletters every morning, summarizes them with AI,
+      and delivers a focused daily briefing to your iPhone — one screen,
       no inbox to manage.
     </p>
 
-    <form class="email-gate" id="download-form" novalidate>
+    <form class="email-gate" id="signup-form" novalidate>
       <div class="form-row">
         <input
           type="email"
@@ -338,13 +346,14 @@
           autocomplete="email"
           required
         >
-        <button type="submit" class="btn-primary" id="submit-btn">Download for Mac</button>
+        <button type="submit" class="btn-primary" id="submit-btn">Join the Beta</button>
       </div>
       <p class="form-note">
-        macOS 13 or later &nbsp;·&nbsp;
+        Sign up to test on TestFlight &nbsp;·&nbsp;
         <a href="privacy.html">Privacy policy</a>
       </p>
       <p class="form-error" id="form-error">Please enter a valid email address.</p>
+      <p class="form-success" id="form-success">You're on the list. We'll send a TestFlight invite soon.</p>
     </form>
   </section>
 
@@ -355,27 +364,27 @@
     <div class="steps-grid">
       <div class="step-item">
         <p class="step-number">01</p>
-        <h3>Install once</h3>
-        <p>Run the installer and connect your Google account. Threde only requests
-        read-only access to your Gmail.</p>
+        <h3>Sign in with Google</h3>
+        <p>Connect your Gmail account. Threde only requests read-only
+        access to your newsletters.</p>
       </div>
       <div class="step-item">
         <p class="step-number">02</p>
         <h3>Wake up to a briefing</h3>
-        <p>Every morning at 5 AM, Threde scans your inbox for newsletters,
-        summarises them, and has the briefing ready in your browser.</p>
+        <p>Every morning at 5 AM, Threde reads your newsletters,
+        summarizes them, and builds a briefing on your phone.</p>
       </div>
       <div class="step-item">
         <p class="step-number">03</p>
         <h3>Read what matters</h3>
-        <p>A single scrollable page per day. Sources listed, key points extracted,
-        nothing you didn't ask for.</p>
+        <p>Stories ranked by importance, key quotes pulled, sources cited.
+        One screen with everything you need to know.</p>
       </div>
       <div class="step-item">
         <p class="step-number">04</p>
-        <h3>Stays on your machine</h3>
-        <p>No cloud sync, no account, no subscription. Your emails and summaries
-        never leave your computer.</p>
+        <h3>Tell it what you care about</h3>
+        <p>Vote on stories and track interests. Threde learns what matters
+        to you and gets sharper every day.</p>
       </div>
     </div>
   </section>
@@ -384,12 +393,11 @@
 
   <section class="req-section">
     <div class="req-inner">
-      <p class="section-label">Before you install</p>
+      <p class="section-label">What you need</p>
       <ul class="req-list">
-        <li>macOS 13 Ventura or later (Apple Silicon or Intel)</li>
-        <li>A Google account — Gmail is used to fetch your newsletters</li>
+        <li>An iPhone running iOS 17 or later</li>
         <li>A Google account — used to sign in and grant read-only Gmail access</li>
-        <li>No Python or developer tools required — everything is bundled</li>
+        <li>Newsletter subscriptions in your Gmail inbox</li>
       </ul>
     </div>
   </section>
@@ -399,17 +407,17 @@
     <ul class="footer-links">
       <li><a href="terms-of-service.html">Terms of service</a></li>
       <li><a href="privacy.html">Privacy policy</a></li>
-      <li><a href="uninstall.html">Uninstall</a></li>
       <li><a href="mailto:threde@threde.ai">Contact</a></li>
     </ul>
   </footer>
 
 <script>
   (function () {
-    var form   = document.getElementById('download-form');
-    var input  = document.getElementById('email-input');
-    var btn    = document.getElementById('submit-btn');
-    var errMsg = document.getElementById('form-error');
+    var form    = document.getElementById('signup-form');
+    var input   = document.getElementById('email-input');
+    var btn     = document.getElementById('submit-btn');
+    var errMsg  = document.getElementById('form-error');
+    var succMsg = document.getElementById('form-success');
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -419,15 +427,16 @@
       // Basic client-side validation
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         errMsg.style.display = 'block';
+        succMsg.style.display = 'none';
         input.focus();
         return;
       }
 
       errMsg.style.display = 'none';
       btn.disabled = true;
-      btn.textContent = 'One moment…';
+      btn.textContent = 'One moment\u2026';
 
-      // Submit to Formspree as JSON (background — user never sees their page)
+      // Submit to Formspree as JSON
       fetch('https://formspree.io/f/xbdavygj', {
         method: 'POST',
         headers: {
@@ -436,11 +445,15 @@
         },
         body: JSON.stringify({ email: email })
       })
-      .catch(function () {
-        // Silently swallow network errors — still send user to download page
+      .then(function () {
+        succMsg.style.display = 'block';
+        btn.textContent = 'Signed Up';
+        input.value = '';
       })
-      .finally(function () {
-        window.location.href = 'download.html';
+      .catch(function () {
+        succMsg.style.display = 'block';
+        btn.textContent = 'Signed Up';
+        input.value = '';
       });
     });
   })();
